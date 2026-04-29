@@ -103,7 +103,4 @@ void loop() {
 	}
 	delay(10);
 }
-<img width="842" height="654" alt="image" src="https://github.com/user-attachments/assets/64e4db9a-969d-40d2-bd05-55ebc54a1e5e" />
-
-
 ```
