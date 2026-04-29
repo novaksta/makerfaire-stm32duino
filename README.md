@@ -59,7 +59,7 @@ void setup() {
 	for (uint8_t adresa = 1; adresa < 127; ++adresa) {
 		myI2C.beginTransmission(adresa);
 		if (!myI2C.endTransmission()) {//ACK LOW
-			mySerial.print(“Found: 0x"); mySerial.println(adresa, HEX);}
+			mySerial.print("Found: 0x"); mySerial.println(adresa, HEX);}
 	}
 }
 ```
