@@ -1,6 +1,6 @@
 # makerfaire-stm32duino
 
-Repozitář obsahuje slajy a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na makerfair v Praze 2026
+Repozitář obsahuje (slajy)[slajdy.pdf] a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Praze 2026
 
 ## Blikaní LED, UART
 ```
