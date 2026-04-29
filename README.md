@@ -90,15 +90,13 @@ void setup() {
 void loop() {
   int32_t accelerometer[3];
   AccGyr.ACC_GetAxes(accelerometer);
-
   int  yDistance = accelerometer[0]/32;
-	int  xDistance = accelerometer[1]/32;
-	if ((xDistance != 0) || (yDistance != 0)) Mouse.move(xDistance, yDistance, 0); 
-	if (digitalRead(mouseButton) == LOW) {
+  int  xDistance = accelerometer[1]/32;
+  if ((xDistance != 0) || (yDistance != 0)) Mouse.move(xDistance, yDistance, 0); 
+  if (digitalRead(mouseButton) == LOW) {
     if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
-	} else {
-    if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT); 
-	}
-	delay(10);
+  } else {
+   if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);}
+  delay(10);
 }
 ```
