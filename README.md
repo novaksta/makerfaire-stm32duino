@@ -67,7 +67,6 @@ void setup() {
 ## USB mems myš
 ```
 #include <ISM330DHCXSensor.h>
-#define SerialPort  Serial
 #define USE_I2C_INTERFACE
 #define dev_interface       Wire
 ISM330DHCXSensor AccGyr(&dev_interface);
