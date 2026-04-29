@@ -79,7 +79,6 @@ const PinMap PinMap_USB[] = {//patch PA_13 NOE
 const int mouseButton = PC13;
 
 void setup() {
-  SerialPort.begin(115200);
   dev_interface.begin();
   AccGyr.begin();
   AccGyr.ACC_Enable();
