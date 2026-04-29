@@ -5,16 +5,16 @@ Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino -
 ## Blikaní LED, UART
 ```
 void setup () {
-	Serial.begin(115200);
-	pinMode( PB7 , OUTPUT ) ;
-	Serial.println("Hello!");
+  Serial.begin(115200);
+  pinMode( PB7 , OUTPUT ) ;
+  Serial.println("Hello!");
 }
 
 void loop () {
-	digitalWrite( PB7, HIGH );
-	delay (100) ;
-	digitalWrite( PB7, LOW );
-	delay (100) ;
+  digitalWrite( PB7, HIGH );
+  delay (100) ;
+  digitalWrite( PB7, LOW );
+  delay (100) ;
 }
 ```
 
@@ -22,10 +22,12 @@ void loop () {
 ```
 HardwareTimer htim4 = HardwareTimer ( TIM4 ); 
 void setup () {
-	pinMode( PB7 , OUTPUT ) ;
-	 htim4.setPWM(2, PB_7, 5, 50) ; // Ch2, pin PB7 , 5Hz , 50% duty
+  pinMode( PB7 , OUTPUT ) ;
+  htim4.setPWM(2, PB_7, 5, 50) ; // Ch2, pin PB7 , 5Hz , 50% duty
 }
-void loop () {}
+void loop () {
+
+}
 ```
 
 ## PWM sinus -- proměnná, pole, cyklus 
@@ -36,13 +38,14 @@ uint8_t c = 0;
 uint8_t sine[256]; 
 
 void setup () {
-pinMode(PB7 , OUTPUT ) ;
-for ( int i =0; i <256; ++ i) 
-sine[i]=( sin(i *2* PI /255.) +1.0)*100/2;
+  pinMode(PB7 , OUTPUT ) ;
+  for ( int i =0; i <256; ++ i){
+    sine[i]=( sin(i *2* PI /255.) +1.0)*100/2;
+  } 
 }
 void loop () {
-htim4.setPWM(2, PB7, 5000, sine[++c]) ; 
-delay (5) ;
+  htim4.setPWM(2, PB7, 5000, sine[++c]) ; 
+  delay (5) ;
 }
 ```
 ## I2C scan
@@ -59,7 +62,8 @@ void setup() {
 	for (uint8_t adresa = 1; adresa < 127; ++adresa) {
 		myI2C.beginTransmission(adresa);
 		if (!myI2C.endTransmission()) {//ACK LOW
-			mySerial.print("Found: 0x"); mySerial.println(adresa, HEX);}
+			mySerial.print("Found: 0x"); mySerial.println(adresa, HEX);
+		}
 	}
 }
 ```
@@ -75,7 +79,8 @@ ISM330DHCXSensor AccGyr(&dev_interface);
 const PinMap PinMap_USB[] = {//patch PA_13 NOE
   {PA_11, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DM
   {PA_12, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DP
-  {NC,    NP,  0} }; 
+  {NC,    NP,  0}
+}; 
 const int mouseButton = PC13;
 
 void setup() {
@@ -97,7 +102,8 @@ void loop() {
   if (digitalRead(mouseButton) == LOW) {
     if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
   } else {
-   if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);}
+   if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);
+  }
   delay(10);
 }
 ```
