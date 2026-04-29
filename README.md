@@ -20,11 +20,13 @@ void loop () {
 
 ## PWM
 ```
-HardwareTimer htim4 = HardwareTimer ( TIM4 ); 
+HardwareTimer htim4 = HardwareTimer ( TIM4 );
+
 void setup () {
   pinMode( PB7 , OUTPUT ) ;
   htim4.setPWM(2, PB_7, 5, 50) ; // Ch2, pin PB7 , 5Hz , 50% duty
 }
+
 void loop () {
 
 }
@@ -43,6 +45,7 @@ void setup () {
     sine[i]=( sin(i *2* PI /255.) +1.0)*100/2;
   } 
 }
+
 void loop () {
   htim4.setPWM(2, PB7, 5000, sine[++c]) ; 
   delay (5) ;
