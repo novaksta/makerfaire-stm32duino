@@ -45,7 +45,7 @@ htim4.setPWM(2, PB7, 5000, sine[++c]) ;
 delay (5) ;
 }
 ```
-# I2C scan
+## I2C scan
 
 ```
 #include <Wire.h>
