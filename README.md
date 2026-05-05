@@ -24,7 +24,7 @@ HardwareTimer htim4 = HardwareTimer ( TIM4 );
 
 void setup () {
   pinMode( PB7 , OUTPUT ) ;
-  htim4.setPWM(2, PB_7, 5, 50) ; // Ch2, pin PB7 , 5Hz , 50% duty
+  htim4.setPWM(2, PB7, 5, 50) ; // Ch2, pin PB7 , 5Hz , 50% duty
 }
 
 void loop () {
