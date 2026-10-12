@@ -1,9 +1,10 @@
 # makerfaire-stm32duino
+### TODO: Update to package and slides
 
-Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Praze 2026.
+Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Brně 2026.
 
 Více informací o STM32duinu naleznete v [dokumentu](material-dokumentace.pdf).
-
+### TODO
 ## Blikaní LED, UART
 ```
 void setup () {
@@ -58,7 +59,7 @@ void loop () {
 ```
 #include <Wire.h>
 TwoWire myI2C(PB9, PB8); //SDA, SCL
-HardwareSerial mySerial(PG8, PG7);//Rx, Tx
+Uart mySerial(PG8, PG7);//Rx, Tx
 
 void setup() {
 	mySerial.begin(115200);
@@ -74,6 +75,8 @@ void setup() {
 ```
 
 ## USB mems myš
+
+### TODO: Update to IKS4
 ```
 #include <ISM330DHCXSensor.h>
 #define USE_I2C_INTERFACE
