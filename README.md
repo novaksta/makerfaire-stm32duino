@@ -1,10 +1,10 @@
 # makerfaire-stm32duino
-### TODO: Update to package and slides
+### TODO: Update to package and slides + last example
 
 Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Brně 2026.
 
 Více informací o STM32duinu naleznete v [dokumentu](material-dokumentace.pdf).
-### TODO
+
 ## Blikaní LED, UART
 ```
 void setup () {
