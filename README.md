@@ -76,7 +76,6 @@ void setup() {
 
 ## USB mems myš
 
-### TODO: Update to IKS4
 ```
 #include <LSM6DSV16XSensor.h>
 #include "Mouse.h"
