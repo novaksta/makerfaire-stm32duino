@@ -1,5 +1,5 @@
 # makerfaire-stm32duino
-### TODO: Update to package and slides + last example
+### TODO: Update to package 
 
 Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Brně 2026.
 
@@ -62,15 +62,15 @@ TwoWire myI2C(PB9, PB8); //SDA, SCL
 Uart mySerial(PG8, PG7);//Rx, Tx
 
 void setup() {
-	mySerial.begin(115200);
-	myI2C.begin();
-	myI2C.setClock(100000);
-	for (uint8_t adresa = 1; adresa < 127; ++adresa) {
-		myI2C.beginTransmission(adresa);
-		if (!myI2C.endTransmission()) {//ACK LOW
-			mySerial.print("Found: 0x"); mySerial.println(adresa, HEX);
-		}
-	}
+  mySerial.begin(115200);
+  myI2C.begin();
+  myI2C.setClock(100000);
+  for (uint8_t adresa = 1; adresa < 127; ++adresa) {
+    myI2C.beginTransmission(adresa);
+    if (!myI2C.endTransmission()) {//ACK LOW
+      mySerial.print("Found: 0x"); mySerial.println(adresa, HEX);
+    }
+  }
 }
 ```
 
@@ -78,40 +78,42 @@ void setup() {
 
 ### TODO: Update to IKS4
 ```
-#include <ISM330DHCXSensor.h>
+#include <LSM6DSV16XSensor.h>
+#include "Mouse.h"
+
+#define SerialPort  Serial
 #define USE_I2C_INTERFACE
 #define dev_interface       Wire
-ISM330DHCXSensor AccGyr(&dev_interface);
 
-#include "Mouse.h"
+LSM6DSV16XSensor AccGyr(&dev_interface);
+
 const PinMap PinMap_USB[] = {//patch PA_13 NOE
   {PA_11, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DM
   {PA_12, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DP
-  {NC,    NP,  0}
-}; 
+  {NC,    NP,  0} }; 
 const int mouseButton = PC13;
 
 void setup() {
+  SerialPort.begin(115200);
   dev_interface.begin();
   AccGyr.begin();
-  AccGyr.ACC_Enable();
-
+  AccGyr.Enable_X(); 
   Mouse.begin();
   pinMode(mouseButton, INPUT);
+
 }
  
 void loop() {
   int32_t accelerometer[3];
-  AccGyr.ACC_GetAxes(accelerometer);
+  AccGyr.Get_X_Axes(accelerometer);
 
-  int  yDistance = accelerometer[0]/32;
-  int  xDistance = accelerometer[1]/32;
+  int yDistance = accelerometer[0]/32;
+  int xDistance = accelerometer[1]/32;
   if ((xDistance != 0) || (yDistance != 0)) Mouse.move(xDistance, yDistance, 0); 
   if (digitalRead(mouseButton) == LOW) {
     if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
   } else {
-   if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);
+    if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT); 
   }
-  delay(10);
 }
 ```
