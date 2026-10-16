@@ -79,9 +79,9 @@ void setup() {
 #include <LSM6DSV16XSensor.h>
 #include "Mouse.h"
 
-#define SerialPort  Serial
+#define SerialPort Serial
 #define USE_I2C_INTERFACE
-#define dev_interface       Wire
+#define dev_interface    Wire
 
 LSM6DSV16XSensor AccGyr(&dev_interface);
 
@@ -92,9 +92,9 @@ const PinMap PinMap_USB[] = {//patch PA_13 NOE
 const int mouseButton = PC13;
 
 void setup() {
-  SerialPort.begin(115200);
-  dev_interface.begin();
-  AccGyr.begin();
+  SerialPort.begin(115200);
+  dev_interface.begin();
+  AccGyr.begin();
   AccGyr.Enable_X(); 
   Mouse.begin();
   pinMode(mouseButton, INPUT);
