@@ -1,5 +1,4 @@
 # makerfaire-stm32duino
-### TODO: last check of slides
 Repozitář obsahuje [slajdy](slajdy.pdf) a příklady z workshopu "STM32duino - posuňte své Arduino na vyšší úroveň" na MakerFaire v Brně 2026.
 
 Více informací o STM32duinu naleznete v [dokumentu](material-dokumentace.pdf).
