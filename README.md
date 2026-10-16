@@ -81,7 +81,7 @@ void setup() {
 
 #define SerialPort Serial
 #define USE_I2C_INTERFACE
-#define dev_interface    Wire
+#define dev_interface  Wire
 
 LSM6DSV16XSensor AccGyr(&dev_interface);
 
