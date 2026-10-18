@@ -132,17 +132,14 @@ const PinMap PinMap_USB[] = {//patch PA_13 NOE
   {PA_12, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DP
   {NC,    NP,  0} }; 
 
-// const int mouseButton = PC13;
 
 void setup() {
   SerialPort.begin(115200);
   dev_interface.begin();
   AccGyr.begin();
   AccGyr.Enable_X(); 
-  Mouse.begin();
-  // pinMode(mouseButton, INPUT);
-
   AccGyr.QVAR_Enable();
+  Mouse.begin();
 }
  
 void loop() {
@@ -152,20 +149,15 @@ void loop() {
   int yDistance = accelerometer[0]/32;
   int xDistance = accelerometer[1]/32;
   if ((xDistance != 0) || (yDistance != 0)) Mouse.move(xDistance, yDistance, 0); 
-  /*if (digitalRead(mouseButton) == LOW) {
-    if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
-  } else {
-    if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT); 
-  }*/  
+
   uint8_t qvar_status;
   AccGyr.QVAR_GetStatus(&qvar_status);
   if (qvar_status) {
     float qvar_data;
     AccGyr.QVAR_GetData(&qvar_data);
-    int8_t qvar_value =  qvar_data/4;//scaled to +-120
-    if(qvar_value > 50){
+    if(qvar_data > 200){
       if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);
-    }else if(qvar_data < -50){
+    }else if(qvar_data < -200){
       if (!Mouse.isPressed(MOUSE_RIGHT)) Mouse.press(MOUSE_RIGHT);
     } else {
       if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
