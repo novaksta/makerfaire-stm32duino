@@ -114,3 +114,63 @@ void loop() {
   }
 }
 ```
+## USB mems myš QVAR
+```
+// QVAR variant for IKS4A -- connect JP4,5 to correct positions (grounded by default seem)
+
+#include <LSM6DSV16XSensor.h>
+#include "Mouse.h"
+
+#define SerialPort Serial
+#define USE_I2C_INTERFACE
+#define dev_interface  Wire
+
+LSM6DSV16XSensor AccGyr(&dev_interface);
+
+const PinMap PinMap_USB[] = {//patch PA_13 NOE
+  {PA_11, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DM
+  {PA_12, USB, STM_PIN_DATA(STM_MODE_AF_PP, LL_GPIO_PULL_NO, GPIO_AF10_USB)}, // USB_DP
+  {NC,    NP,  0} }; 
+
+// const int mouseButton = PC13;
+
+void setup() {
+  SerialPort.begin(115200);
+  dev_interface.begin();
+  AccGyr.begin();
+  AccGyr.Enable_X(); 
+  Mouse.begin();
+  // pinMode(mouseButton, INPUT);
+
+  AccGyr.QVAR_Enable();
+}
+ 
+void loop() {
+  int32_t accelerometer[3];
+  AccGyr.Get_X_Axes(accelerometer);
+
+  int yDistance = accelerometer[0]/32;
+  int xDistance = accelerometer[1]/32;
+  if ((xDistance != 0) || (yDistance != 0)) Mouse.move(xDistance, yDistance, 0); 
+  /*if (digitalRead(mouseButton) == LOW) {
+    if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
+  } else {
+    if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT); 
+  }*/  
+  uint8_t qvar_status;
+  AccGyr.QVAR_GetStatus(&qvar_status);
+  if (qvar_status) {
+    float qvar_data;
+    AccGyr.QVAR_GetData(&qvar_data);
+    int8_t qvar_value =  qvar_data/4;//scaled to +-120
+    if(qvar_value > 50){
+      if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);
+    }else if(qvar_data < -50){
+      if (!Mouse.isPressed(MOUSE_RIGHT)) Mouse.press(MOUSE_RIGHT);
+    } else {
+      if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
+      if (Mouse.isPressed(MOUSE_RIGHT)) Mouse.release(MOUSE_RIGHT);
+    }
+  }
+}
+```
