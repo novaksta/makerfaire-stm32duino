@@ -155,9 +155,9 @@ void loop() {
   if (qvar_status) {
     float qvar_data;
     AccGyr.QVAR_GetData(&qvar_data);
-    if(qvar_data > 200){
+    if(qvar_data > 300){
       if (!Mouse.isPressed(MOUSE_LEFT)) Mouse.press(MOUSE_LEFT);
-    }else if(qvar_data < -200){
+    }else if(qvar_data < -300){
       if (!Mouse.isPressed(MOUSE_RIGHT)) Mouse.press(MOUSE_RIGHT);
     } else {
       if (Mouse.isPressed(MOUSE_LEFT)) Mouse.release(MOUSE_LEFT);
